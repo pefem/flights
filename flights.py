@@ -5,7 +5,8 @@ import requests
 class Flights:
 
     def __init__(self) -> None:
-        self.base_url = 'https://www.aerlingus.com/api/v2/flights/fixed'
+        self.flight_url = 'https://www.aerlingus.com/api/v2/flights/fixed'
+        self.airport_url = 'https://www.aerlingus.com/api/airport/en'
         self.headers = self.get_headers()
 
     def get_headers(self):
@@ -38,8 +39,12 @@ class Flights:
 
         return params
     
-    def get_response(self, params):
-        response = requests.get(self.base_url, params=params, headers=self.headers)
+    def get_flight_response(self, params):
+        response = requests.get(self.flight_url, params=params, headers=self.headers)
+        return response
+
+    def get_airport_response(self):
+        response = requests.get(self.airport_url, headers=self.headers)
         return response
 
 
